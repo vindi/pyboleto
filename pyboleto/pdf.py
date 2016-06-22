@@ -20,6 +20,7 @@ from reportlab.pdfgen import canvas
 
 
 class BoletoPDF(object):
+
     """Geração do Boleto em PDF
 
     Esta classe é responsável por imprimir o boleto em PDF.
@@ -796,6 +797,310 @@ class BoletoPDF(object):
         x += d[0]
         return x, d[1]
 
+    def _af_setup_pdf(self):
+        self.pdf_canvas.setAuthor('Aceita Fácil Pagamentos')
+        self.pdf_canvas.setTitle('Nome do Merchant')
+        self.pdf_canvas.setSubject('Boleto Bancário')
+        # logo_image_path =
+
+    def _af_draw_box_header(self, width=18, height=1, margin_left=1, margin_bottom=27):
+        self.pdf_canvas.rect(margin_left*cm, margin_bottom*cm, width*cm, height*cm, fill=0, stroke=1)
+
+    def _af_draw_box(self, width=18, height=1, margin_left=1, margin_bottom=27):
+        self.pdf_canvas.rect(margin_left*cm, margin_bottom*cm, width*cm, height*cm, fill=0, stroke=1)
+
+    def _af_draw_box_sm(self, width=18, height=1, margin_left=1, margin_bottom=27, title=None):
+        self.pdf_canvas.rect(margin_left*cm, margin_bottom*cm, width*cm, height*cm*0.7, fill=0, stroke=1)
+
+        if title:
+            self.pdf_canvas.drawString((+1.1) * cm, 27.5*cm, title)
+
+    def _af_p(self, repeat=1):
+        self.pdf_canvas.translate(0, -cm*repeat)
+
+    def _af_br(self, repeat=1):
+        self.pdf_canvas.translate(0, -cm*0.7*repeat)
+
+    def _af_generate_boleto(self, boleto_dados):
+        self.image = load_image(boleto_dados.logo_image)
+
+        self._af_setup_pdf()
+        self.pdf_canvas.setFont("Helvetica-Bold", 16)
+        self.pdf_canvas.drawString(1.5 * cm, 27.3*cm, "Instruções de Pagamento")
+        self.pdf_canvas.setFont("Helvetica", 13)
+        self._af_p()
+        self.pdf_canvas.drawString(
+            1.5 * cm, 27.3*cm, "Por favor, leia com atenção e siga as instruções na sessão 'Instruções' deste")
+        self._af_br()
+        self.pdf_canvas.drawString(
+            1.5 * cm, 27.3*cm, "boleto bancário")
+        self._af_p()
+        self.pdf_canvas.drawString(
+            1.5 * cm, 27.3*cm, "Utilize folha A4 (210 x 297mm) para impressão. Não imprima no 'modo econômico' ")
+        self._af_p()
+        self.pdf_canvas.drawString(
+            1.5 * cm, 27.3*cm, "A entrega deste produto/serviço é de única e exclusiva responsabilidade do")
+        self._af_br()
+        self.pdf_canvas.drawString(
+            1.5 * cm, 27.3*cm, "estabelecimento comercial.")
+        self._af_p()
+        self.pdf_canvas.drawString(
+            1.5 * cm, 27.3*cm, "Em caso de dúvidas, entre em contato com o suporte indicado na sessão 'Instruções'")
+        self._af_br()
+        self._af_draw_box_header(height=7.7)
+        self._af_p(3)
+
+        self.pdf_canvas.setFont("Helvetica-Bold", 9)
+        self.pdf_canvas.drawString(15.5 * cm, 28.3*cm, "RECIBO DO PAGADOR")
+        self.pdf_canvas.setFont("Helvetica-Bold", 16)
+        self.pdf_canvas.drawInlineImage(self.image, cm, 27*cm, width=4*cm, height=cm)
+        self._af_draw_box(4)
+        self.pdf_canvas.drawString(5.3 * cm, 27.3*cm, boleto_dados.codigo_dv_banco)
+        self._af_draw_box(2, margin_left=5)
+        self.pdf_canvas.setFont("Helvetica-Bold", 11.5)
+        self.pdf_canvas.drawString(7.3 * cm, 27.35*cm, boleto_dados.linha_digitavel)
+        self._af_draw_box(12, margin_left=7)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Beneficiário")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15 * cm, boleto_dados.cedente + boleto_dados.sacado[0])
+        self._af_draw_box_sm(8.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(9.6 * cm, 27.5*cm, "Agência / Código do Beneficiário")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(9.6 * cm, 27.15*cm, boleto_dados.agencia_conta_cedente)
+        self._af_draw_box_sm(3.5, margin_left=9.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(13.1 * cm, 27.5*cm, "Espécie")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(13.1 * cm, 27.15*cm, boleto_dados.especie)
+        self._af_draw_box_sm(1, margin_left=13)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(14.1 * cm, 27.5*cm, "Quantidade")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(14.1 * cm, 27.15*cm, boleto_dados.quantidade)
+        self._af_draw_box_sm(1.5, margin_left=14)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.6 * cm, 27.5*cm, "Nosso Número")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(15.6 * cm, 27.15*cm, boleto_dados.format_nosso_numero())
+        self._af_draw_box_sm(3.5, margin_left=15.5)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Número do documento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.numero_documento)
+        self._af_draw_box_sm(5.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(6.6 * cm, 27.5*cm, "CPF / CNPJ")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(6.6 * cm, 27.15*cm, boleto_dados.cedente_documento)
+        self._af_draw_box_sm(3.5, margin_left=6.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(10.1 * cm, 27.5*cm, "Data de Vencimento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(10.1 * cm, 27.15*cm, boleto_dados.data_vencimento.strftime('%d/%m/%Y'))
+        self._af_draw_box_sm(4, margin_left=10)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(14.1 * cm, 27.5*cm, "Valor Documento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(14.1 * cm, 27.15*cm, boleto_dados.valor_documento)
+        self._af_draw_box_sm(5, margin_left=14)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "(-) Descontos / Abatimentos")
+        self._af_draw_box_sm(4)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(5.1 * cm, 27.5*cm, "(-) Outras deduções")
+        self._af_draw_box_sm(3, margin_left=5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(8.1 * cm, 27.5*cm, "(+) Mora / Multa")
+        self._af_draw_box_sm(3, margin_left=8)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(11.1 * cm, 27.5*cm, "(+) Outros acrécimos")
+        self._af_draw_box_sm(3, margin_left=11)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(14.1 * cm, 27.5*cm, "(=) Valor Cobrado")
+        self._af_draw_box_sm(5, margin_left=14)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Pagador")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.sacado[0] + ' - ' + 'incluir documento ou email')
+        self._af_draw_box_sm()
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Instruções")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.cedente + ' - ' + boleto_dados.cedente_documento)
+        self._af_draw_box_sm(14)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Autenticação Mecânica")
+        self._af_draw_box_sm(4, margin_left=15)
+
+        self._af_br()
+        self.pdf_canvas.setDash(4, 4)
+        self.pdf_canvas.setLineWidth(0)
+        self.pdf_canvas.line(1.1 * cm, 26.5*cm, 19 * cm, 26.5*cm)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(17 * cm, 26.6*cm, "Corte na linha abaixo")
+        self.pdf_canvas.setDash(1, 0)  # clears it
+        self.pdf_canvas.setLineWidth(1)
+        self._af_br()
+        self._af_p(2)
+        self.pdf_canvas.setFont("Helvetica-Bold", 16)
+        self.pdf_canvas.drawInlineImage(self.image, cm, 27*cm, width=4*cm, height=cm)
+        self._af_draw_box(4)
+        self.pdf_canvas.drawString(5.3 * cm, 27.3*cm, "033-7")
+        self._af_draw_box(2, margin_left=5)
+        self.pdf_canvas.setFont("Helvetica-Bold", 11.5)
+        self.pdf_canvas.drawString(7.3 * cm, 27.35*cm, boleto_dados.linha_digitavel)
+        self._af_draw_box(12, margin_left=7)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Local de pagamento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.local_pagamento)
+        self._af_draw_box_sm(14)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Vencimento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(15.1 * cm, 27.15*cm, boleto_dados.data_vencimento.strftime('%d/%m/%Y'))
+        self._af_draw_box_sm(4, margin_left=15)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Beneficiário")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.cedente +
+                                   boleto_dados.cedente + ", " +
+                                   boleto_dados.cedente_documento)
+        self._af_draw_box_sm(14)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Agência / Código do Beneficiário")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(15.1 * cm, 27.15*cm, boleto_dados.agencia_conta_cedente)
+        self._af_draw_box_sm(4, margin_left=15)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Data do Documento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.data_documento.strftime('%d/%m/%Y'))
+        self._af_draw_box_sm(2.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(3.6 * cm, 27.5*cm, "Nro do Documento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(3.6 * cm, 27.15*cm, boleto_dados.numero_documento)
+        self._af_draw_box_sm(3, margin_left=3.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(6.6 * cm, 27.5*cm, "Espécie Doc.")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(6.6 * cm, 27.15*cm, boleto_dados.especie_documento)
+        self._af_draw_box_sm(3, margin_left=6.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(9.6 * cm, 27.5*cm, "Aceite")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(9.6 * cm, 27.15*cm, boleto_dados.aceite)
+        self._af_draw_box_sm(2, margin_left=9.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(11.6 * cm, 27.5*cm, "Data Processamento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(11.6 * cm, 27.15*cm, boleto_dados.data_processamento.strftime('%d/%m/%Y'))
+        self._af_draw_box_sm(3.5, margin_left=11.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Nosso Número")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(15.1 * cm, 27.15*cm, boleto_dados.format_nosso_numero())
+        self._af_draw_box_sm(4, margin_left=15)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Uso do Banco")
+        self._af_draw_box_sm(2.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(3.6 * cm, 27.5*cm, "Carteira")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(3.6 * cm, 27.15*cm, boleto_dados.carteira)
+        self._af_draw_box_sm(2, margin_left=3.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(5.6 * cm, 27.5*cm, "Espécie")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(5.6 * cm, 27.15*cm, boleto_dados.especie)
+        self._af_draw_box_sm(2.5, margin_left=5.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(8.1 * cm, 27.5*cm, "Quantidade")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(8.1 * cm, 27.5*cm, boleto_dados.quantidade)
+        self._af_draw_box_sm(3.5, margin_left=8)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(11.6 * cm, 27.5*cm, "Valor")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(11.6 * cm, 27.15*cm, self._formataValorParaExibir(boleto_dados.valor))
+        self._af_draw_box_sm(3.5, margin_left=11.5)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Valor Documento")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(15.1 * cm, 27.15*cm, self._formataValorParaExibir(boleto_dados.valor_documento))
+        self._af_draw_box_sm(4, margin_left=15)
+
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Instruções (texto de responsabilidade do Beneficiário)")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(
+            1.1 * cm, 27*cm, boleto_dados.vendedor_nome + ' - ' + boleto_dados.vendedor_documento)
+
+        self.pdf_canvas.drawString(1.1 * cm, 26.6*cm, boleto_dados.instrucoes[0])
+        self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.instrucoes[1])
+        self.pdf_canvas.drawString(1.1 * cm, 25.8 * cm, '')
+        self.pdf_canvas.drawString(1.1 * cm, 25.4*cm, '')
+        self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, '')
+        self.pdf_canvas.drawString(1.1 * cm, 24.35*cm, '')
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(-) Descontos / Abatimentos")
+        self._af_draw_box_sm(4, margin_left=15)
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(-) Outras deduções")
+        self._af_draw_box_sm(4, margin_left=15)
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(+) Mora / Multa")
+        self._af_draw_box_sm(4, margin_left=15)
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(+) Outros acrécimos")
+        self._af_draw_box_sm(4, margin_left=15)
+        self._af_br()
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(=) Valor cobrado")
+        self._af_draw_box_sm(4, margin_left=15)
+
+        self._af_draw_box_sm(14, height=5)
+
+        self._af_br(3)
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(1.1 * cm, 28.9*cm, "Pagador")
+        self.pdf_canvas.setFont("Helvetica", 9)
+        self.pdf_canvas.drawString(1.1 * cm, 28.55*cm, boleto_dados.sacado[0] + ' - ' + 'email ou doc')
+        self._af_draw_box_sm(height=3)
+        self.pdf_canvas.setFont("Helvetica-Bold", 9)
+        self.pdf_canvas.drawString(14.9 * cm, 26.6*cm, "FICHA DE COMPENSAÇÃO")
+        self.pdf_canvas.setFont("Helvetica", 6)
+        self.pdf_canvas.drawString(12.1 * cm, 26.7*cm, "Autenticação Mecânica")
+        # self._codigoBarraI25(boleto_dados.barcode, 2 * self.space, 0)
+        # boleto_dados_barcode = "03399630763107635324759169001027168260000001000"
+        self._codigoBarraI25(boleto_dados.barcode, x=1 * cm, y=25.55*cm)
+        # def _codigoBarraI25(self, num, x, y):
+
     def drawBoleto(self, boleto_dados):
         """Imprime Boleto Convencional
 
@@ -806,6 +1111,10 @@ class BoletoPDF(object):
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boleto_dados: :class:`pyboleto.data.BoletoData`
         """
+
+        self._af_generate_boleto(boleto_dados)
+        return True
+
         x = 9 * mm  # margem esquerda
         y = 10 * mm  # margem inferior
 
