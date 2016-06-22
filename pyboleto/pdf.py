@@ -865,7 +865,8 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Beneficiário")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 27.15 * cm, boleto_dados.cedente + boleto_dados.sacado[0])
+        self.pdf_canvas.drawString(
+            1.1 * cm, 27.15 * cm, boleto_dados.nome_emissor + ' a serviço de ' + boleto_dados.vendedor_nome_fantasia)
         self._af_draw_box_sm(8.5)
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(9.6 * cm, 27.5*cm, "Agência / Código do Beneficiário")
@@ -907,7 +908,7 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(14.1 * cm, 27.5*cm, "Valor Documento")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(14.1 * cm, 27.15*cm, boleto_dados.valor_documento)
+        self.pdf_canvas.drawString(14.1 * cm, 27.15*cm, 'R$ ' + boleto_dados.valor_documento)
         self._af_draw_box_sm(5, margin_left=14)
 
         self._af_br()
@@ -931,14 +932,17 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Pagador")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.sacado[0] + ' - ' + 'incluir documento ou email')
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.sacado[0] + ' - ' + boleto_dados.sacado[1])
         self._af_draw_box_sm()
 
         self._af_br()
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Instruções")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.cedente + ' - ' + boleto_dados.cedente_documento)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm,
+                                   boleto_dados.vendedor_razao_social.upper() + ' ' +
+                                   boleto_dados.vendedor_tipo_documento + ' ' +
+                                   boleto_dados.vendedor_documento)
         self._af_draw_box_sm(14)
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Autenticação Mecânica")
@@ -957,7 +961,7 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica-Bold", 16)
         self.pdf_canvas.drawInlineImage(self.image, cm, 27*cm, width=4*cm, height=cm)
         self._af_draw_box(4)
-        self.pdf_canvas.drawString(5.3 * cm, 27.3*cm, "033-7")
+        self.pdf_canvas.drawString(5.3 * cm, 27.3*cm, boleto_dados.codigo_dv_banco)
         self._af_draw_box(2, margin_left=5)
         self.pdf_canvas.setFont("Helvetica-Bold", 11.5)
         self.pdf_canvas.drawString(7.3 * cm, 27.35*cm, boleto_dados.linha_digitavel)
@@ -979,9 +983,11 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Beneficiário")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.cedente +
-                                   boleto_dados.cedente + ", " +
-                                   boleto_dados.cedente_documento)
+        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm,
+                                   boleto_dados.nome_emissor +
+                                   ' a serviço de ' +
+                                   boleto_dados.vendedor_nome_fantasia +
+                                   ' CNPJ:' + boleto_dados.cedente_documento)
         self._af_draw_box_sm(14)
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Agência / Código do Beneficiário")
@@ -1048,22 +1054,26 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "Valor Documento")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(15.1 * cm, 27.15*cm, self._formataValorParaExibir(boleto_dados.valor_documento))
+        self.pdf_canvas.drawString(
+            15.1 * cm, 27.15*cm, 'R$ ' + self._formataValorParaExibir(boleto_dados.valor_documento))
         self._af_draw_box_sm(4, margin_left=15)
 
         self._af_br()
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Instruções (texto de responsabilidade do Beneficiário)")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(
-            1.1 * cm, 27*cm, boleto_dados.vendedor_nome + ' - ' + boleto_dados.vendedor_documento)
+        self.pdf_canvas.drawString(1.1 * cm, 27*cm,
+                                   boleto_dados.vendedor_razao_social.upper() + ' ' +
+                                   boleto_dados.vendedor_tipo_documento + ' ' +
+                                   boleto_dados.vendedor_documento)
 
-        self.pdf_canvas.drawString(1.1 * cm, 26.6*cm, boleto_dados.instrucoes[0])
-        self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.instrucoes[1])
-        self.pdf_canvas.drawString(1.1 * cm, 25.8 * cm, '')
-        self.pdf_canvas.drawString(1.1 * cm, 25.4*cm, '')
-        self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, '')
-        self.pdf_canvas.drawString(1.1 * cm, 24.35*cm, '')
+        self.pdf_canvas.drawString(
+            1.1 * cm, 26.6*cm, 'é o prestador dos serviços cujo pagamento será efetuado por este boleto, gerado por ')
+        self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.razao_social_emissor.upper())
+        self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[0])
+        self.pdf_canvas.drawString(1.1 * cm, 25.3*cm, boleto_dados.instrucoes[1])
+        self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, 'Não receber após vencimento')
+        self.pdf_canvas.drawString(1.1 * cm, 24.35*cm, 'Não aceitar pagamento com cheque')
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(-) Descontos / Abatimentos")
         self._af_draw_box_sm(4, margin_left=15)
@@ -1090,7 +1100,7 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 28.9*cm, "Pagador")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 28.55*cm, boleto_dados.sacado[0] + ' - ' + 'email ou doc')
+        self.pdf_canvas.drawString(1.1 * cm, 28.55*cm, boleto_dados.sacado[0] + ' - ' + boleto_dados.sacado[1])
         self._af_draw_box_sm(height=3)
         self.pdf_canvas.setFont("Helvetica-Bold", 9)
         self.pdf_canvas.drawString(14.9 * cm, 26.6*cm, "FICHA DE COMPENSAÇÃO")
