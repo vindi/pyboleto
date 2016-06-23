@@ -37,7 +37,7 @@ class BoletoSantander(BoletoData):
 
         self.codigo_banco = "033"
         self.logo_image = "logo_santander.png"
-        self.carteira = '102'
+        self.carteira = '101'
         # IOS - somente para Seguradoras (Se 7% informar 7, limitado 9%)
         # Demais clientes usar 0 (zero)
         self.ios = "0"
