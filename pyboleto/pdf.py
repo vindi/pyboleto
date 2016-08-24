@@ -1072,7 +1072,7 @@ class BoletoPDF(object):
         self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.razao_social_emissor.upper())
         self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[0])
         self.pdf_canvas.drawString(1.1 * cm, 25.3*cm, boleto_dados.instrucoes[1])
-        self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, 'Não receber após vencimento')
+        self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, 'Não receber após 15 dias do vencimento')
         self.pdf_canvas.drawString(1.1 * cm, 24.35*cm, 'Não aceitar pagamento com cheque')
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(-) Descontos / Abatimentos")
