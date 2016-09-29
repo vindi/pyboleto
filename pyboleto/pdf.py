@@ -1112,8 +1112,6 @@ class BoletoPDF(object):
         # def _codigoBarraI25(self, num, x, y):
 
     def drawBoleto(self, boleto_dados):
-        import pdb
-        pdb.set_trace()
         """Imprime Boleto Convencional
 
         Você pode chamar este método diversas vezes para criar um arquivo com
