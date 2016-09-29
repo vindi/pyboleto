@@ -799,7 +799,7 @@ class BoletoPDF(object):
 
     def _af_setup_pdf(self):
         self.pdf_canvas.setAuthor('Aceita Fácil Pagamentos')
-        self.pdf_canvas.setTitle('Nome do Merchant')
+        self.pdf_canvas.setTitle('Aceita Facil Pagamentos')
         self.pdf_canvas.setSubject('Boleto Bancário')
         # logo_image_path =
 
@@ -1112,6 +1112,8 @@ class BoletoPDF(object):
         # def _codigoBarraI25(self, num, x, y):
 
     def drawBoleto(self, boleto_dados):
+        import pdb
+        pdb.set_trace()
         """Imprime Boleto Convencional
 
         Você pode chamar este método diversas vezes para criar um arquivo com
