@@ -15,7 +15,9 @@ from decimal import Decimal
 
 
 class BoletoException(Exception):
+
     """ Exceções para erros no pyboleto"""
+
     def __init__(self, message):
         Exception.__init__(self, message)
 
@@ -24,6 +26,7 @@ _EPOCH = datetime.date(1997, 10, 7)
 
 
 class CustomProperty(object):
+
     """Função para criar propriedades nos boletos
 
     Cria propriedades com getter, setter e delattr.
@@ -43,6 +46,7 @@ class CustomProperty(object):
     :type length: integer
 
     """
+
     def __init__(self, name, length):
         self.name = name
         self.length = length
@@ -66,6 +70,7 @@ class CustomProperty(object):
 
 
 class BoletoData(object):
+
     """Interface para implementações específicas de bancos
 
     Esta classe geralmente nunca será usada diretamente. Geralmente o usuário
@@ -170,6 +175,7 @@ class BoletoData(object):
         self._sacado = None
         self._valor = None
         self._valor_documento = None
+        self.max_dias_apos_vencimento = 15
 
     @property
     def barcode(self):
