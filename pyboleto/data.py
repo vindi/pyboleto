@@ -175,7 +175,7 @@ class BoletoData(object):
         self._sacado = None
         self._valor = None
         self._valor_documento = None
-        self.max_dias_apos_vencimento = 15
+        self.max_dias_apos_vencimento = kwargs.pop('max_dias_apos_vencimento', "15")
 
     @property
     def barcode(self):
