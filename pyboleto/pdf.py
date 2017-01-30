@@ -932,7 +932,14 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Pagador")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 27.15*cm, boleto_dados.sacado[0] + ' - ' + boleto_dados.sacado[1])
+
+        if len(boleto_dados.sacado) == 2:
+            self.pdf_canvas.drawString(1.1 * cm, 27.15 * cm, boleto_dados.sacado[0] + ' - ' + boleto_dados.sacado[1])
+        elif len(boleto_dados.sacado) == 3:
+            self.pdf_canvas.drawString(1.1 * cm, 27.15 * cm,
+                                       boleto_dados.sacado[0] + ' - ' +
+                                       boleto_dados.sacado[1] + ' - ' +
+                                       boleto_dados.sacado[2])
         self._af_draw_box_sm()
 
         self._af_br()
@@ -1102,7 +1109,15 @@ class BoletoPDF(object):
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 28.9*cm, "Pagador")
         self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 28.55*cm, boleto_dados.sacado[0] + ' - ' + boleto_dados.sacado[1])
+
+        if len(boleto_dados.sacado) == 2:
+            self.pdf_canvas.drawString(1.1 * cm, 28.55 * cm, boleto_dados.sacado[0] + ' - ' + boleto_dados.sacado[1])
+        elif len(boleto_dados.sacado) == 3:
+            self.pdf_canvas.drawString(1.1 * cm, 28.55 * cm,
+                                       boleto_dados.sacado[0] + ' - ' +
+                                       boleto_dados.sacado[1] + ' - ' +
+                                       boleto_dados.sacado[2])
+
         self._af_draw_box_sm(height=3)
         self.pdf_canvas.setFont("Helvetica-Bold", 9)
         self.pdf_canvas.drawString(14.9 * cm, 26.6*cm, "FICHA DE COMPENSAÇÃO")
