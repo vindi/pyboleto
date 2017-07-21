@@ -171,11 +171,20 @@ class BoletoData(object):
             raise TypeError("Paramêtro(s) desconhecido: %r" % (kwargs, ))
         self._cedente_endereco = None
         self._demonstrativo = []
-        self._instrucoes = []
+        self._instrucoes = ['', '']
         self._sacado = None
         self._valor = None
         self._valor_documento = None
         self.max_dias_apos_vencimento = kwargs.pop('max_dias_apos_vencimento', "15")
+
+        # Novos nomes para os dados
+        self.nome_emissor = self.cedente
+        self.vendedor_nome_fantasia = self.cedente
+        self.vendedor_razao_social = self.cedente
+        self.vendedor_tipo_documento = ''
+        self.vendedor_documento = self.cedente_documento
+
+        self.razao_social_emissor = self.sacado_nome
 
     @property
     def barcode(self):
