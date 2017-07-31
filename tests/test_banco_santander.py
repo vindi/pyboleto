@@ -25,12 +25,12 @@ class TestBancoSantander(BoletoTestCase):
 
     def test_linha_digitavel(self):
         self.assertEqual(self.dados[0].linha_digitavel,
-            '03399.07073 07700.000123 34567.901029 5 54020000295295'
+            '03399.07073 07700.000123 34567.901011 7 54020000295295'
         )
 
     def test_codigo_de_barras(self):
         self.assertEqual(self.dados[0].barcode,
-            '03395540200002952959070707700000123456790102'
+            '03397540200002952959070707700000123456790101'
         )
 
     def test_agencia(self):
