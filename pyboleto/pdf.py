@@ -822,6 +822,14 @@ class BoletoPDF(object):
         self.pdf_canvas.translate(0, -cm*0.7*repeat)
 
     def _af_generate_boleto(self, boleto_dados):
+        if boleto_dados.max_dias_apos_vencimento == 0:
+            msg_apos_vencimento = 'Não receber após o vencimento'
+        else:
+            msg_apos_vencimento = (
+                'Não receber após ' +
+                str(boleto_dados.max_dias_apos_vencimento) +
+                ' dias do vencimento'
+                )
         self.image = load_image(boleto_dados.logo_image)
 
         self._af_setup_pdf()
