@@ -822,14 +822,16 @@ class BoletoPDF(object):
         self.pdf_canvas.translate(0, -cm*0.7*repeat)
 
     def _af_generate_boleto(self, boleto_dados):
+        boleto_dados.max_dias_apos_vencimento =\
+            int(boleto_dados.max_dias_apos_vencimento)
+
         if boleto_dados.max_dias_apos_vencimento == 0:
             msg_apos_vencimento = 'Não receber após o vencimento'
         else:
-            msg_apos_vencimento = (
-                'Não receber após ' +
-                str(boleto_dados.max_dias_apos_vencimento) +
-                ' dias do vencimento'
-                )
+            msg_apos_vencimento =\
+                'Não receber após {} dias do vencimento'.format(
+                    boleto_dados.max_dias_apos_vencimento
+                    )
         self.image = load_image(boleto_dados.logo_image)
 
         self._af_setup_pdf()
@@ -1087,9 +1089,16 @@ class BoletoPDF(object):
         self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.razao_social_emissor.upper())
         self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[0])
         self.pdf_canvas.drawString(1.1 * cm, 25.3*cm, boleto_dados.instrucoes[1])
-        self.pdf_canvas.drawString(
-            1.1 * cm, 24.75*cm,
-            'Não receber após ' + str(boleto_dados.max_dias_apos_vencimento) + ' dias do vencimento')
+
+        if boleto_dados.max_dias_apos_vencimento < 1:
+            boleto_dados.mensagem_recebimento = 'Não receber após o vencimento'
+        else:
+            boleto_dados.mensagem_recebimento =\
+                'Não receber após {} dias do vencimento'.format(
+                    boleto_dados.max_dias_apos_vencimento
+                    )
+
+        self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, boleto_dados.mensagem_recebimento)
         self.pdf_canvas.drawString(1.1 * cm, 24.35*cm, 'Não aceitar pagamento com cheque')
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(15.1 * cm, 27.5*cm, "(-) Descontos / Abatimentos")
