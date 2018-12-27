@@ -17,6 +17,8 @@ from reportlab.lib.pagesizes import A4, landscape as pagesize_landscape
 from reportlab.lib.units import mm, cm
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
+from reportlab.platypus import Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 class BoletoPDF(object):
@@ -1097,6 +1099,21 @@ class BoletoPDF(object):
                 'Não receber após {} dias do vencimento'.format(
                     boleto_dados.max_dias_apos_vencimento
                     )
+        style = getSampleStyleSheet()['Normal']
+        style.fontName = "Helvetica"
+        style.fontSize = 9
+
+        link = 'https://www.itau.com.br/servicos/boletos/atualizar/'
+
+        text_content = (
+            "Após o vencimento, atualize seu boleto em: <a href=" + link + ">" + link + "</a><br />"
+            "Esse boleto depende do registro no banco emissor.<br />"
+            "Caso não consiga pagar imediatamente, por favor, tente mais tarde."
+        )
+
+        text = Paragraph(text_content, style=style)
+        text.wrapOn(self.pdf_canvas, 14 * cm, 0)
+        text.drawOn(self.pdf_canvas, 1.1 * cm, 24.35*cm)
 
         self.pdf_canvas.drawString(1.1 * cm, 24.75*cm, boleto_dados.mensagem_recebimento)
         self.pdf_canvas.drawString(1.1 * cm, 24.35*cm, 'Não aceitar pagamento com cheque')
