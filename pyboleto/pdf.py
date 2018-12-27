@@ -1110,7 +1110,7 @@ class BoletoPDF(object):
         link = 'https://www.itau.com.br/servicos/boletos/atualizar/'
 
         text_content = (
-            "Após o vencimento, atualize seu boleto em: <a href=" + link + ">" + link + "</a><br />"
+            "Após o vencimento, atualize seu boleto em: <a color='blue' href='" + link + "'><u>" + link + "</u></a><br />"
             "Esse boleto depende do registro no banco emissor.<br />"
             "Caso não consiga pagar imediatamente, por favor, tente mais tarde."
         )
