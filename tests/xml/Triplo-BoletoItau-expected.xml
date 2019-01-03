@@ -6,6 +6,7 @@
     <fontspec color="#000000" family="Helvetica" id="3" size="15" />
     <fontspec color="#000000" family="Helvetica" id="4" size="7" />
     <fontspec color="#000000" family="Helvetica" id="5" size="11" />
+    <fontspec color="#0000ff" family="Helvetica" id="6" size="11" />
     <text font="0" height="22" left="64" top="-284" width="292">
       <b>Instru&#231;&#245;es de Pagamento</b>
     </text>
@@ -89,8 +90,12 @@
     <text font="4" height="8" left="47" top="546" width="215">Instru&#231;&#245;es (texto de responsabilidade do Benefici&#225;rio)</text>
     <text font="5" height="12" left="47" top="564" width="8">  </text>
     <text font="5" height="12" left="47" top="581" width="514">&#233; o prestador dos servi&#231;os cujo pagamento ser&#225; efetuado por este boleto, gerado por </text>
-    <text font="5" height="12" left="47" top="660" width="246">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
-    <text font="5" height="12" left="47" top="677" width="218">N&#227;o aceitar pagamento com cheque</text>
+    <text font="5" height="12" left="47" top="636" width="265">Ap&#243;s o vencimento, atualize seu boleto em: </text>
+    <text font="6" height="12" left="312" top="636" width="299">
+      <a href="https://www.itau.com.br/servicos/boletos/atualizar/">https://www.itau.com.br/servicos/boletos/atualizar/</a>
+    </text>
+    <text font="5" height="12" left="47" top="654" width="308">Esse boleto depende do registro no banco emissor.</text>
+    <text font="5" height="12" left="47" top="672" width="407">Caso n&#227;o consiga pagar imediatamente, por favor, tente mais tarde.</text>
     <text font="4" height="8" left="642" top="546" width="112">(-) Descontos / Abatimentos</text>
     <text font="4" height="8" left="642" top="576" width="80">(-) Outras dedu&#231;&#245;es</text>
     <text font="4" height="8" left="642" top="606" width="64">(+) Mora / Multa</text>
@@ -187,8 +192,12 @@
     <text font="4" height="8" left="47" top="546" width="215">Instru&#231;&#245;es (texto de responsabilidade do Benefici&#225;rio)</text>
     <text font="5" height="12" left="47" top="564" width="8">  </text>
     <text font="5" height="12" left="47" top="581" width="514">&#233; o prestador dos servi&#231;os cujo pagamento ser&#225; efetuado por este boleto, gerado por </text>
-    <text font="5" height="12" left="47" top="660" width="246">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
-    <text font="5" height="12" left="47" top="677" width="218">N&#227;o aceitar pagamento com cheque</text>
+    <text font="5" height="12" left="47" top="636" width="265">Ap&#243;s o vencimento, atualize seu boleto em: </text>
+    <text font="6" height="12" left="312" top="636" width="299">
+      <a href="https://www.itau.com.br/servicos/boletos/atualizar/">https://www.itau.com.br/servicos/boletos/atualizar/</a>
+    </text>
+    <text font="5" height="12" left="47" top="654" width="308">Esse boleto depende do registro no banco emissor.</text>
+    <text font="5" height="12" left="47" top="672" width="407">Caso n&#227;o consiga pagar imediatamente, por favor, tente mais tarde.</text>
     <text font="4" height="8" left="642" top="546" width="112">(-) Descontos / Abatimentos</text>
     <text font="4" height="8" left="642" top="576" width="80">(-) Outras dedu&#231;&#245;es</text>
     <text font="4" height="8" left="642" top="606" width="64">(+) Mora / Multa</text>
@@ -285,8 +294,12 @@
     <text font="4" height="8" left="47" top="546" width="215">Instru&#231;&#245;es (texto de responsabilidade do Benefici&#225;rio)</text>
     <text font="5" height="12" left="47" top="564" width="8">  </text>
     <text font="5" height="12" left="47" top="581" width="514">&#233; o prestador dos servi&#231;os cujo pagamento ser&#225; efetuado por este boleto, gerado por </text>
-    <text font="5" height="12" left="47" top="660" width="246">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
-    <text font="5" height="12" left="47" top="677" width="218">N&#227;o aceitar pagamento com cheque</text>
+    <text font="5" height="12" left="47" top="636" width="265">Ap&#243;s o vencimento, atualize seu boleto em: </text>
+    <text font="6" height="12" left="312" top="636" width="299">
+      <a href="https://www.itau.com.br/servicos/boletos/atualizar/">https://www.itau.com.br/servicos/boletos/atualizar/</a>
+    </text>
+    <text font="5" height="12" left="47" top="654" width="308">Esse boleto depende do registro no banco emissor.</text>
+    <text font="5" height="12" left="47" top="672" width="407">Caso n&#227;o consiga pagar imediatamente, por favor, tente mais tarde.</text>
     <text font="4" height="8" left="642" top="546" width="112">(-) Descontos / Abatimentos</text>
     <text font="4" height="8" left="642" top="576" width="80">(-) Outras dedu&#231;&#245;es</text>
     <text font="4" height="8" left="642" top="606" width="64">(+) Mora / Multa</text>
