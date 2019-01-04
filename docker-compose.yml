@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  test:
+    command: "python setup.py test"
+    volumes:
+      - .:${HOME}/pyboleto
+    build:
+      context: .
+      args:
+        user: ${USER}
+        uid: ${UID}
+
