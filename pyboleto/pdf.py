@@ -1095,7 +1095,8 @@ class BoletoPDF(object):
         if boleto_dados.codigo_banco == '341':
             style = getSampleStyleSheet()['Normal']
             style.fontName = "Helvetica"
-            style.fontSize = 9
+            style.fontSize = 8
+            style.leading = 9
 
             link = 'https://www.itau.com.br/servicos/boletos/atualizar/'
 
@@ -1107,7 +1108,7 @@ class BoletoPDF(object):
 
             text = Paragraph(text_content, style=style)
             text.wrapOn(self.pdf_canvas, 14 * cm, 0)
-            text.drawOn(self.pdf_canvas, 1.1 * cm, 24.35*cm)
+            text.drawOn(self.pdf_canvas, 1.1 * cm, 24.25*cm)
         else:
             if boleto_dados.max_dias_apos_vencimento < 1:
                 boleto_dados.mensagem_recebimento = 'Não receber após o vencimento'
