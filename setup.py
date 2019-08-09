@@ -68,7 +68,8 @@ setup(
     test_suite='tests.alltests.suite',
     install_requires=[
         'distribute',
-        'reportlab'
+        'reportlab==3.3.0',
+        'Pillow==3.3.1'
     ],
     tests_require=[
         'pylint',
