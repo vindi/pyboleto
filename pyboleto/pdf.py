@@ -1087,7 +1087,7 @@ class BoletoPDF(object):
                                    boleto_dados.vendedor_documento)
 
         self.pdf_canvas.drawString(
-            1.1 * cm, 26.6*cm, 'é o prestador dos serviços cujo pagamento será efetuado por este boleto, gerado por ')
+            1.1 * cm, 26.6*cm, 'processa os pagamentos utilizando tecnologia confiável e inovadora ')
         self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.razao_social_emissor.upper())
         self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[0])
         self.pdf_canvas.drawString(1.1 * cm, 25.3*cm, boleto_dados.instrucoes[1])
