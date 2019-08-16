@@ -6,6 +6,7 @@
     <fontspec color="#000000" family="Helvetica" id="3" size="15" />
     <fontspec color="#000000" family="Helvetica" id="4" size="7" />
     <fontspec color="#000000" family="Helvetica" id="5" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="6" size="10" />
     <text font="0" height="22" left="64" top="-284" width="292">
       <b>Instru&#231;&#245;es de Pagamento</b>
     </text>
@@ -86,10 +87,10 @@
     <text font="4" height="8" left="642" top="517" width="70">Valor Documento</text>
     <text font="5" height="12" left="642" top="528" width="55">R$ 35,00</text>
     <text font="4" height="8" left="47" top="546" width="215">Instru&#231;&#245;es (texto de responsabilidade do Benefici&#225;rio)</text>
-    <text font="5" height="12" left="47" top="564" width="8">  </text>
-    <text font="5" height="12" left="47" top="581" width="412">processa os pagamentos utilizando tecnologia confi&#225;vel e inovadora </text>
-    <text font="5" height="12" left="47" top="660" width="246">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
-    <text font="5" height="12" left="47" top="677" width="218">N&#227;o aceitar pagamento com cheque</text>
+    <text font="6" height="11" left="47" top="557" width="7">  </text>
+    <text font="6" height="11" left="47" top="574" width="366">processa os pagamentos utilizando tecnologia confi&#225;vel e inovadora </text>
+    <text font="6" height="11" left="47" top="661" width="219">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
+    <text font="6" height="11" left="47" top="678" width="193">N&#227;o aceitar pagamento com cheque</text>
     <text font="4" height="8" left="642" top="546" width="112">(-) Descontos / Abatimentos</text>
     <text font="4" height="8" left="642" top="576" width="80">(-) Outras dedu&#231;&#245;es</text>
     <text font="4" height="8" left="642" top="606" width="64">(+) Mora / Multa</text>
@@ -183,10 +184,10 @@
     <text font="4" height="8" left="642" top="517" width="70">Valor Documento</text>
     <text font="5" height="12" left="642" top="528" width="55">R$ 35,00</text>
     <text font="4" height="8" left="47" top="546" width="215">Instru&#231;&#245;es (texto de responsabilidade do Benefici&#225;rio)</text>
-    <text font="5" height="12" left="47" top="564" width="8">  </text>
-    <text font="5" height="12" left="47" top="581" width="412">processa os pagamentos utilizando tecnologia confi&#225;vel e inovadora </text>
-    <text font="5" height="12" left="47" top="660" width="246">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
-    <text font="5" height="12" left="47" top="677" width="218">N&#227;o aceitar pagamento com cheque</text>
+    <text font="6" height="11" left="47" top="557" width="7">  </text>
+    <text font="6" height="11" left="47" top="574" width="366">processa os pagamentos utilizando tecnologia confi&#225;vel e inovadora </text>
+    <text font="6" height="11" left="47" top="661" width="219">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
+    <text font="6" height="11" left="47" top="678" width="193">N&#227;o aceitar pagamento com cheque</text>
     <text font="4" height="8" left="642" top="546" width="112">(-) Descontos / Abatimentos</text>
     <text font="4" height="8" left="642" top="576" width="80">(-) Outras dedu&#231;&#245;es</text>
     <text font="4" height="8" left="642" top="606" width="64">(+) Mora / Multa</text>
@@ -280,10 +281,10 @@
     <text font="4" height="8" left="642" top="517" width="70">Valor Documento</text>
     <text font="5" height="12" left="642" top="528" width="55">R$ 35,00</text>
     <text font="4" height="8" left="47" top="546" width="215">Instru&#231;&#245;es (texto de responsabilidade do Benefici&#225;rio)</text>
-    <text font="5" height="12" left="47" top="564" width="8">  </text>
-    <text font="5" height="12" left="47" top="581" width="412">processa os pagamentos utilizando tecnologia confi&#225;vel e inovadora </text>
-    <text font="5" height="12" left="47" top="660" width="246">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
-    <text font="5" height="12" left="47" top="677" width="218">N&#227;o aceitar pagamento com cheque</text>
+    <text font="6" height="11" left="47" top="557" width="7">  </text>
+    <text font="6" height="11" left="47" top="574" width="366">processa os pagamentos utilizando tecnologia confi&#225;vel e inovadora </text>
+    <text font="6" height="11" left="47" top="661" width="219">N&#227;o receber ap&#243;s 15 dias do vencimento</text>
+    <text font="6" height="11" left="47" top="678" width="193">N&#227;o aceitar pagamento com cheque</text>
     <text font="4" height="8" left="642" top="546" width="112">(-) Descontos / Abatimentos</text>
     <text font="4" height="8" left="642" top="576" width="80">(-) Outras dedu&#231;&#245;es</text>
     <text font="4" height="8" left="642" top="606" width="64">(+) Mora / Multa</text>
