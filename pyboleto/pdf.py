@@ -1089,8 +1089,6 @@ class BoletoPDF(object):
         self.pdf_canvas.drawString(
             1.1 * cm, 26.8*cm, 'processa os pagamentos utilizando tecnologia confiável e inovadora ')
         self.pdf_canvas.drawString(1.1 * cm, 26.4*cm, boleto_dados.razao_social_emissor.upper())
-
-
         self.pdf_canvas.drawString(1.1 * cm, 26.0 * cm, boleto_dados.instrucoes[0])
         self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[1])
         if len(boleto_dados.instrucoes) > 2 and boleto_dados.instrucoes[2] != '':
