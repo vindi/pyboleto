@@ -1080,17 +1080,20 @@ class BoletoPDF(object):
         self._af_br()
         self.pdf_canvas.setFont("Helvetica", 6)
         self.pdf_canvas.drawString(1.1 * cm, 27.5*cm, "Instruções (texto de responsabilidade do Beneficiário)")
-        self.pdf_canvas.setFont("Helvetica", 9)
-        self.pdf_canvas.drawString(1.1 * cm, 27*cm,
+        self.pdf_canvas.setFont("Helvetica", 8)
+        self.pdf_canvas.drawString(1.1 * cm, 27.2*cm,
                                    boleto_dados.vendedor_razao_social.upper() + ' ' +
                                    boleto_dados.vendedor_tipo_documento + ' ' +
                                    boleto_dados.vendedor_documento)
 
         self.pdf_canvas.drawString(
-            1.1 * cm, 26.6*cm, 'processa os pagamentos utilizando tecnologia confiável e inovadora ')
-        self.pdf_canvas.drawString(1.1 * cm, 26.2*cm, boleto_dados.razao_social_emissor.upper())
-        self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[0])
-        self.pdf_canvas.drawString(1.1 * cm, 25.3*cm, boleto_dados.instrucoes[1])
+            1.1 * cm, 26.8*cm, 'processa os pagamentos utilizando tecnologia confiável e inovadora ')
+        self.pdf_canvas.drawString(1.1 * cm, 26.4*cm, boleto_dados.razao_social_emissor.upper())
+        self.pdf_canvas.drawString(1.1 * cm, 26.0 * cm, boleto_dados.instrucoes[0])
+        self.pdf_canvas.drawString(1.1 * cm, 25.7 * cm, boleto_dados.instrucoes[1])
+        if len(boleto_dados.instrucoes) > 2 and boleto_dados.instrucoes[2] != '':
+            self.pdf_canvas.drawString(1.1 * cm, 25.4*cm, boleto_dados.instrucoes[2])
+
 
         if boleto_dados.codigo_banco == '341':
             style = getSampleStyleSheet()['Normal']
