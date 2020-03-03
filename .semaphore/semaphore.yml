@@ -1,0 +1,17 @@
+# Documentação sobre Semaphore 2.0 com Docker:
+# https://docs.semaphoreci.com/article/78-working-with-docker-images
+version: v1.0
+name: pyboleto
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      jobs:
+        - name: Setup
+          commands:
+            - export UID
+            - docker-compose build
+            - docker-compose run test
