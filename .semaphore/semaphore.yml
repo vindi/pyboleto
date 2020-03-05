@@ -1,5 +1,3 @@
-# Documentação sobre Semaphore 2.0 com Docker:
-# https://docs.semaphoreci.com/article/78-working-with-docker-images
 version: v1.0
 name: pyboleto
 agent:
@@ -12,9 +10,9 @@ blocks:
       jobs:
         - name: Setup
           commands:
-            - cache restore
             - export USER
             - export UID
+            - cache restore
             - docker-compose build
             - docker-compose run test
             - cache store
