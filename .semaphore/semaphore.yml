@@ -12,6 +12,8 @@ blocks:
       jobs:
         - name: Setup
           commands:
+            - cache restore
             - export UID
             - docker-compose build
             - docker-compose run test
+            - cache store
