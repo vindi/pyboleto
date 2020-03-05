@@ -13,6 +13,7 @@ blocks:
         - name: Setup
           commands:
             - cache restore
+            - export USER
             - export UID
             - docker-compose build
             - docker-compose run test
