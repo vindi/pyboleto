@@ -1,0 +1,19 @@
+version: v1.0
+name: pyboleto
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      jobs:
+        - name: Setup
+          commands:
+            - checkout
+            - export USER
+            - export UID
+            - cache restore
+            - docker-compose build
+            - docker-compose run test
+            - cache store
