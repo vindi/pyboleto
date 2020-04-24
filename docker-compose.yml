@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   test:
-    command: "python setup.py test"
+    command: "tox"
     volumes:
       - .:${HOME}/pyboleto
     build:
