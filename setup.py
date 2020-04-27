@@ -69,7 +69,7 @@ setup(
     install_requires=[
         'distribute',
         'reportlab==3.3.0',
-        'Pillow==3.3.1'
+        'Pillow==6.2.2'
     ],
     tests_require=[
         'pylint',
