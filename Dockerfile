@@ -1,4 +1,4 @@
-FROM python:3.4
+FROM python:3.5.1
 
 ARG user
 ARG uid
@@ -12,6 +12,9 @@ poppler-utils \
 
 RUN adduser --gecos "$user" --uid "$uid" --disabled-login "$user"
 
-WORKDIR "/home/$user/pyboleto"
+RUN easy_install distribute
+RUN pip install --upgrade pip setuptools wheel
+RUN pip install pylint tox coverage pep8 sphinx-pypi-upload sphinx
 
+WORKDIR "/home/$user/pyboleto"
 USER "$user"
