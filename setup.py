@@ -68,7 +68,7 @@ setup(
     test_suite='tests.alltests.suite',
     install_requires=[
         'distribute',
-        'reportlab==3.3.0',
+        'reportlab==3.6.13',
         'Pillow==6.2.0'
     ],
     tests_require=[
